@@ -1,6 +1,6 @@
 import unittest
-from unittest.mock import patch
 from game import TicTacToe
+
 
 class TestWinner(unittest.TestCase):
 
