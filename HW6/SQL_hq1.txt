@@ -1,0 +1,177 @@
+####################111111111111111111111111###############################
+
+mysql> CREATE DATABASE my_items;
+Query OK, 1 row affected (0,09 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_items           |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0,01 sec)
+
+mysql> USE my_items;
+
+
+
+
+
+mysql> CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT, first_name CHAR(255), last_name CHAR(255), about_me VARCHAR(255), is_developer TINYINT(1), PRIMARY
+KEY(id));
+Query OK, 0 rows affected, 1 warning (0,10 sec)
+
+mysql> SHOW TABLES;
++--------------------+
+| Tables_in_my_items |
++--------------------+
+| users              |
++--------------------+
+1 row in set (0,00 sec)
+
+mysql> SHOW COLUMNS FROM users;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int          | NO   | PRI | NULL    | auto_increment |
+| first_name   | char(255)    | YES  |     | NULL    |                |
+| last_name    | char(255)    | YES  |     | NULL    |                |
+| about_me     | varchar(255) | YES  |     | NULL    |                |
+| is_developer | tinyint(1)   | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+5 rows in set (0,00 sec)
+
+mysql> INSERT INTO users (first_name, last_name, about_me, is_developer) VALUES ("Shura", "Korob", "cool man", 0);
+Query OK, 1 row affected (0,06 sec)
+mysql> INSERT INTO users (first_name, last_name, about_me, is_developer, email) VALUES ("Vitalia", "Gorn", "not bad man", 0, "gov@email.com"), ("Vovchyk", "Bronk", "real nigga", 1, "vovn@email.com");
+Query OK, 2 rows affected (0,01 sec)
+
+
+mysql> SELECT * FROM users;
++----+------------+-----------+-------------+--------------+----------------+
+| id | first_name | last_name | about_me    | is_developer | email          |
++----+------------+-----------+-------------+--------------+----------------+
+|  1 | Shura      | Korob     | cool man    |            1 | test@email.com |
+|  3 | Vitalia    | Gorn      | not bad man |            0 | gov@email.com  |
+|  4 | Vovchyk    | Bronk     | real nigga  |            1 | vovn@email.com |
++----+------------+-----------+-------------+--------------+----------------+
+3 rows in set (0,00 sec)
+
+
+
+
+
+mysql> CREATE TABLE phones (id INT NOT NULL, phone_name VARCHAR(255), company_id INT NOT NULL, user_id INT NOT NULL);
+Query OK, 0 rows affected (1,22 sec)
+
+mysql> CREATE TABLE phone_companies (id INT NOT NULL, name VARCHAR(255));
+Query OK, 0 rows affected (0,07 sec)
+
+mysql> SHOW TABLES
+    -> ;
++--------------------+
+| Tables_in_my_items |
++--------------------+
+| phone_companies    |
+| phones             |
+| users              |
++--------------------+
+3 rows in set (0,00 sec)
+
+mysql> ALTER TABLE phones ADD PRIMARY KEY(id);
+Query OK, 0 rows affected (0,23 sec)
+
+mysql> ALTER TABLE phone_companies ADD PRIMARY KEY(id);
+Query OK, 0 rows affected (0,54 sec)
+
+
+
+
+
+mysql> SELECT * FROM users WHERE is_developer > 0;
++----+------------+-----------+------------+--------------+----------------+
+| id | first_name | last_name | about_me   | is_developer | email          |
++----+------------+-----------+------------+--------------+----------------+
+|  1 | Shura      | Korob     | cool man   |            1 | test@email.com |
+|  4 | Vovchyk    | Bronk     | real nigga |            1 | vovn@email.com |
++----+------------+-----------+------------+--------------+----------------+
+2 rows in set (0,00 sec)
+
+
+
+
+
+mysql> INSERT INTO phone_companies (id, name) VALUES (1, "xiaomi"), (2, "apple"), (3, "samsung");
+Query OK, 3 rows affected (0,04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM phone_companies
+    -> ;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | xiaomi  |
+|  2 | apple   |
+|  3 | samsung |
++----+---------+
+3 rows in set (0,00 sec)
+
+
+
+
+mysql> INSERT INTO phones (id, phone_name, company_id, user_id) VALUES (1, "Redmi 4X", 1, 1), (2, "iPhone X", 2, 2), (3, "A20", 3, 3);
+Query OK, 3 rows affected (0,01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM phones;
++----+------------+------------+---------+
+| id | phone_name | company_id | user_id |
++----+------------+------------+---------+
+|  1 | Redmi 4X   |          1 |       1 |
+|  2 | iPhone X   |          2 |       2 |
+|  3 | A20        |          3 |       3 |
++----+------------+------------+---------+
+3 rows in set (0,00 sec)
+
+
+
+
+mysql> SELECT * FROM phones WHERE company_id="xiaomi"
+    -> ;
+Empty set, 1 warning (0,00 sec)
+
+mysql> SELECT * FROM phones WHERE company_id=1;
++----+------------+------------+---------+
+| id | phone_name | company_id | user_id |
++----+------------+------------+---------+
+|  1 | Redmi 4X   |          1 |       1 |
++----+------------+------------+---------+
+1 row in set (0,00 sec)
+
+
+
+
+
+####################2222222222222222222###############################
+
+mysql> SELECT * FROM users WHERE id IN (SELECT user_id FROM phones);
++----+------------+-----------+-------------+--------------+----------------+
+| id | first_name | last_name | about_me    | is_developer | email          |
++----+------------+-----------+-------------+--------------+----------------+
+|  1 | Shura      | Korob     | cool man    |            1 | test@email.com |
+|  3 | Vitalia    | Gorn      | not bad man |            0 | gov@email.com  |
++----+------------+-----------+-------------+--------------+----------------+
+2 rows in set (0,00 sec)
+
+
+
+
+
+
+
+
+
