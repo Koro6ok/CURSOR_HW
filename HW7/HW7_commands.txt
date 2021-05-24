@@ -1,0 +1,33 @@
+2. Modify table products add user_id as foreign key
+
+mysql> ALTER TABLE products ADD COLUMN user_id INT NOT NULL;
+Query OK, 0 rows affected (0,07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE products ADD FOREIGN KEY (user_id) REFERENCES users(id);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`shop`.`#sql-463_8`, CONSTRAINT `products_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`))
+mysql> UPDATE products SET user_id=1;
+Query OK, 1 row affected (0,01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> ALTER TABLE products ADD FOREIGN KEY (user_id) REFERENCES users(id);
+Query OK, 1 row affected (0,30 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+
+
+
+3. Select users their products, collections and images and write this query to file.
+
+mysql> SELECT u.id, u.first_name, u.last_name, p.title, p.price, c.title as category_title, pi.file FROM users u JOIN products p on
+p.user_id=u.id JOIN categories_products cp on cp.product_id=p.id JOIN categories c on c.id = cp.category_id JOIN product_images pi on pi.product_id=p.id;
++----+------------+-----------+-------+----------+----------------+-----------------------------------------------------------------------------------+
+| id | first_name | last_name | title | price    | category_title | file                                                                              |
++----+------------+-----------+-------+----------+----------------+-----------------------------------------------------------------------------------+
+|  1 | Liubomyr   | Luzhnyi   | ROlex | 10000.99 | Watches        | https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg  |
+|  1 | Liubomyr   | Luzhnyi   | ROlex | 10000.99 | Watches        | 1https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg |
+|  1 | Liubomyr   | Luzhnyi   | ROlex | 10000.99 | Watches        | 2https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg |
++----+------------+-----------+-------+----------+----------------+-----------------------------------------------------------------------------------+
+3 rows in set (0,00 sec)
+
+
