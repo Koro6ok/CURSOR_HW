@@ -1,0 +1,98 @@
+11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+
+C:\Users\Сашко>docker images
+REPOSITORY                  TAG       IMAGE ID       CREATED        SIZE
+docker_practice_flask_app   latest    3b12802dddb3   2 hours ago    70.6MB
+flask_app_with_db           latest    3b12802dddb3   2 hours ago    70.6MB
+flask_app1                  latest    b76cefb11644   3 days ago     399MB
+flask_app                   latest    8978cc21d1f4   3 days ago     399MB
+mysql                       5.7       2c9028880e58   2 weeks ago    447MB
+<none>                      <none>    da31557705db   5 weeks ago    72.7MB
+my_build                    latest    8e01c74e7993   5 weeks ago    72.7MB
+ubuntu                      latest    7e0aa2d69a15   5 weeks ago    72.7MB
+hello-world                 latest    d1165f221234   2 months ago   13.3kB
+
+C:\Users\Сашко\ubuntu>docker save -o ubuntu.tar ubuntu
+
+C:\Users\Сашко\ubuntu>dir -sh ubuntu.tar
+ Том в устройстве C не имеет метки.
+ Серийный номер тома: 001F-7CBF
+
+ Содержимое папки C:\Users\Сашко\ubuntu
+
+
+ Содержимое папки C:\Users\Сашко\ubuntu
+
+31.05.2021  12:49        75 109 376 ubuntu.tar
+               1 файлов     75 109 376 байт
+               0 папок  117 725 847 552 байт свободно
+
+
+C:\Users\Сашко\ubuntu>tar -xvf ubuntu.tar -C ubuntu
+x 15cbe1c29902a1020a4a47c835a82f0416f1896f02fac942fdd35d326c63fa22/
+x 15cbe1c29902a1020a4a47c835a82f0416f1896f02fac942fdd35d326c63fa22/VERSION
+x 15cbe1c29902a1020a4a47c835a82f0416f1896f02fac942fdd35d326c63fa22/json
+x 15cbe1c29902a1020a4a47c835a82f0416f1896f02fac942fdd35d326c63fa22/layer.tar
+x 58389d83a39da794257e8632f41b2a8f2d624758584a24a9e8ae470a635f239f/
+x 58389d83a39da794257e8632f41b2a8f2d624758584a24a9e8ae470a635f239f/VERSION
+x 58389d83a39da794257e8632f41b2a8f2d624758584a24a9e8ae470a635f239f/json
+x 58389d83a39da794257e8632f41b2a8f2d624758584a24a9e8ae470a635f239f/layer.tar
+x 6d56becb66b184f78b25f61dc91f68fcfce4baeecb3a8dcb21ada2306091aab7/
+x 6d56becb66b184f78b25f61dc91f68fcfce4baeecb3a8dcb21ada2306091aab7/VERSION
+x 6d56becb66b184f78b25f61dc91f68fcfce4baeecb3a8dcb21ada2306091aab7/json
+x 6d56becb66b184f78b25f61dc91f68fcfce4baeecb3a8dcb21ada2306091aab7/layer.tar
+x 7e0aa2d69a153215c790488ed1fcec162015e973e49962d438e18249d16fa9bd.json
+x manifest.json
+x repositories
+
+
+
+(venv) C:\Users\Сашко\PycharmProjects\Docker_Practice>docker build -t time_italy_rome .
+[+] Building 2.2s (5/5) FINISHED
+ => [internal] load build definition from Dockerfile                                          0.8s
+ => => transferring dockerfile: 76B                                                           0.0s
+ => [internal] load .dockerignore                                                             1.2s
+ => => transferring context: 2B                                                               0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:latest                              0.0s
+ => CACHED [1/1] FROM docker.io/library/ubuntu                                                0.0s
+ => exporting to image                                                                        0.4s
+ => => exporting layers                                                                       0.0s
+ => => writing image sha256:bd9741d8e4847ffd994fc4d2e289b508fdfcac6c30cd11fae3748ab5737ec3c0  0.1s
+ => => naming to docker.io/library/time_italy_rome                                            0.1s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix the
+m
+
+
+
+2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+
+
+(venv) C:\Users\Сашко\PycharmProjects\Docker_Practice>docker images
+REPOSITORY                  TAG       IMAGE ID       CREATED        SIZE
+docker_practice_flask_app   latest    3b12802dddb3   4 hours ago    70.6MB
+flask_app_with_db           latest    3b12802dddb3   4 hours ago    70.6MB
+flask_app1                  latest    b76cefb11644   3 days ago     399MB
+flask_app                   latest    8978cc21d1f4   3 days ago     399MB
+mysql                       5.7       2c9028880e58   2 weeks ago    447MB
+rome_time                   latest    e333df3d52b7   5 weeks ago    72.7MB
+<none>                      <none>    3f7f073fd863   5 weeks ago    72.7MB
+<none>                      <none>    da31557705db   5 weeks ago    72.7MB
+my_build                    latest    8e01c74e7993   5 weeks ago    72.7MB
+time_rome                   latest    8971bbe5e6be   5 weeks ago    72.7MB
+timezone_rome               latest    8971bbe5e6be   5 weeks ago    72.7MB
+time_italy_rome             latest    bd9741d8e484   5 weeks ago    72.7MB
+ubuntu                      latest    7e0aa2d69a15   5 weeks ago    72.7MB
+<none>                      <none>    6afdca001ea7   6 weeks ago    5.62MB
+<none>                      <none>    c952b7dc7e54   6 weeks ago    5.62MB
+<none>                      <none>    b3edb6f4d17b   6 weeks ago    5.62MB
+<none>                      <none>    e47b6c08add2   6 weeks ago    5.62MB
+hello-world                 latest    d1165f221234   2 months ago   13.3kB
+<none>                      <none>    468c5089fbe9   2 years ago    4.03MB
+<none>                      <none>    8971e4e9756c   2 years ago    4.03MB
+<none>                      <none>    736db7c4cb15   2 years ago    4.03MB
+<none>                      <none>    e77c4e81df69   2 years ago    4.03MB
+rome_time_last              latest    66ca013423ae   2 years ago    4.03MB
+
+(venv) C:\Users\Сашко\PycharmProjects\Docker_Practice>docker run bd
+Mon May 31 12:04:46 Italy 2021
