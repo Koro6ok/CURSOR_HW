@@ -16,7 +16,7 @@ def homepage():
 
 @app.route('/sign-up', methods=["GET"])
 def sign_up():
-    if session.get('user', None):
+    if session.get('user', False):
         return redirect('/')
     return render_template('blog/shared/signup.html')
 
@@ -31,6 +31,7 @@ def user_store():
         bio=data.get('description'),
         created=datetime.datetime.now(),
         admin=0,
+        location=data.get('location')
     )
 
     db.session.add(user)
@@ -60,11 +61,13 @@ def login():
     if user:
         if check_password(user.password, request.form.get('password')):
             session['user'] = user.serialize
+            session['location'] = user.serialize
     else:
         user = User.query.filter_by(username=request.form.get('username')).first()
         if user:
             if check_password(user.password, request.form.get('password')):
                 session['user'] = user.serialize
+                session['location'] = user.serialize
 
     return redirect('/')
 
@@ -76,16 +79,20 @@ def article_details(slug):
 
 @app.route('/article/create')
 def article_create():
+    if not session.get('user', False):
+        return redirect('/')
     return render_template('/blog/article_create.html')
 
 
 @app.route('/article/store', methods=["POST"])
 def article_store():
+    if not session.get('user', False):
+        return redirect('/')
     data = request.form
     img = request.files['img']
     if img:
         img.save(os.path.join(Config.UPLOAD_PATH, img.filename))
-        path = "/" + Config.UPLOAD_PATH +img.filename
+        path = "/" + Config.UPLOAD_PATH + img.filename
 
 
     article = Article(
@@ -94,7 +101,8 @@ def article_store():
         slug=data.get('slug'),
         description=data.get('description'),
         short_description=data.get('short_description'),
-        img=path
+        img=path,
+        location=data.get('location')
     )
     db.session.add(article)
     db.session.commit()

@@ -1,26 +1,21 @@
-<!doctype html>
-<html lang="en">
-<head>
-    {% include 'blog/shared/head.html' %}
-
-    <title>Cursor Blog | Cursor</title>
-</head>
-<body>
-<div class="wrapper">
-    {% include 'blog/shared/header.html' %}
-    <div class="container">
-        <div class="row card-group" >
-            <div class="col-sm-12">
-                <div class="row">
+{% extends 'blog/base.html' %}
+{% block title %}
+<title>Homepage</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row card-group" >
+        <div class="col-sm-12">
+            <div class="row">
+                {% if session.get('user') %}
                     {% for article in articles %}
-                        {% include 'blog/shared/article.html' %}
+                        {% if article.location == session.get('user').get('location') %}
+                            {% include 'blog/shared/article.html' %}
+                        {% endif %}
                     {% endfor %}
-                </div>
+                {% endif %}
             </div>
         </div>
-    </div></div>
-
-{% include 'blog/shared/footer.html' %}
-{% include 'blog/shared/scripts.html' %}
-</body>
-</html>
+    </div>
+</div>
+{% endblock %}

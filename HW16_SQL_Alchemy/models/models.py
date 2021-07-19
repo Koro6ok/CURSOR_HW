@@ -45,6 +45,12 @@ class User(db.Model,Serializer):
         unique=False,
         nullable=False
     )
+    location = db.Column(
+        db.String(69),
+        index=False,
+        unique=False,
+        nullable=False
+    )
     articles = db.relationship("Article", backref='author', lazy=True)
 
     def __repr__(self):
@@ -57,7 +63,8 @@ class User(db.Model,Serializer):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            'bio': self.bio,
+            "bio": self.bio,
+            "location": self.location
         }
 
 
@@ -105,6 +112,12 @@ class Article(db.Model):
         index=False,
         unique=False
     )
+    location = db.Column(
+        db.String(69),
+        index=False,
+        unique=False,
+        nullable=False
+    )
     categories = db.relationship("Category", secondary=article_categories, back_populates="articles")
 
     @property
@@ -115,6 +128,7 @@ class Article(db.Model):
             "slug": self.slug,
             'description': self.description,
             "short_description": self.short_description,
+            "location": self.location,
             "img": self.img
         }
 
