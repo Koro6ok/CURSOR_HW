@@ -2,6 +2,8 @@
 from flask import Flask, render_template, request, jsonify, Response
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer
 
 
 
@@ -14,6 +16,8 @@ app.secret_key = "RU07JnYcDG92dnGTs2STpNDCTmfC3cns"
 app.config.from_object("config.Config")
 
 api = Api(app)
+
+mail = Mail(app)
 
 db.init_app(app)
 
