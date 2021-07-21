@@ -12,4 +12,4 @@ RUN pip install flask
 COPY . /usr/src/app/
 RUN pip install -r requirements.txt
 
-CMD ["./wait-for-it.sh", "mysql:3306", "--", "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD ["./wait-for-it.sh", "mysql:3306", "--", "gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
