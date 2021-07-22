@@ -54,3 +54,7 @@ footer {
 .card-group {
     margin-bottom: 40px;
 }
+
+.error {
+    color: red;
+}

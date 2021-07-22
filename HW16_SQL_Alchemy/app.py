@@ -3,17 +3,20 @@ from flask import Flask, render_template, request, jsonify, Response
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
-from itsdangerous import URLSafeTimedSerializer
 
 
-
-db = SQLAlchemy()
 
 app = Flask(__name__)
 
 app.secret_key = "RU07JnYcDG92dnGTs2STpNDCTmfC3cns"
 
 app.config.from_object("config.Config")
+
+session_options = {
+    'autocommit': True
+}
+
+db = SQLAlchemy(app, session_options=session_options)
 
 api = Api(app)
 
