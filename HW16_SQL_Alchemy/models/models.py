@@ -1,10 +1,9 @@
 """Data models."""
 from app import db
-# from helpers.serializers import Serializer
+from helpers.serializers import Serializer
 
 
-# class User(db.Model,Serializer):
-class User(db.Model):
+class User(db.Model,Serializer):
     """Data model for user accounts."""
     __tablename__ = 'users'
     id = db.Column(
@@ -50,6 +49,7 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
 
     @property
     def serialize(self):
