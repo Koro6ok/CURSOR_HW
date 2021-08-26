@@ -1,8 +1,9 @@
-from app import app, api, db
+from app import app, api, db, mail
 from flask import render_template, request, Response
 from config import Config, articles
 from flask_restful import Resource, Api
 from models.models import Article, User
+from flask_mail import Message
 
 
 class MenuItem(Resource):
@@ -127,6 +128,19 @@ class UsersCreate(Resource):
         return user.serialize
 
 
+class Contact(Resource):
+    def post(self):
+        data = request.json
+        msg = Message('Contact form alert', sender='curses.test@gmail.com', recipients=['korobchuk.aleksandr@gmail.com'])
+        msg.html = "Contact Email: " + data['email'] + "<br>" + "Contact Title: " + data['title'] + "<br>" + "Contact Description: " + data['description'] + "<br>" + "This message from 'contact us' form"
+        mail.send(msg)
+        client_msg = Message('Dear Client!', sender='curses.test@gmail.com', recipients=[data['email']])
+        client_msg.html = render_template("blog/emails/contact.html", email=data['email'])
+        mail.send(client_msg)
+        return Response(status=200)
+
+
+
 
 class FooterItem(Resource):
     def get(self):
@@ -143,4 +157,5 @@ api.add_resource(Users, '/api/users')
 api.add_resource(UsersRead, '/api/users/read/<int:id>')
 api.add_resource(UsersUpdate, '/api/users/update/<int:id>')
 api.add_resource(UsersCreate, '/api/users/create')
+api.add_resource(Contact, '/api/contact')
 api.add_resource(FooterItem, '/api/footer-items')

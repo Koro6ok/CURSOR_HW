@@ -10,12 +10,12 @@
             </ul>
         </div>
         <div class="user-profile-block">
-            {% if session.get('user', None) %}
+            {% if session.get('user', None) and session.get('user').get('activated') %}
                 <span> {{ session.get('user').get('email') }}</span>
                 <a href="logout"> Log out</a>
             {% else %}
-            <a href="/sign-in">Sign In</a>
-            <a href="/sign-up">Sign Up</a>
+                <a href="/sign-in">Sign In</a>
+                <a href="/sign-up">Sign Up</a>
             {% endif %}
         </div>
     </div>
