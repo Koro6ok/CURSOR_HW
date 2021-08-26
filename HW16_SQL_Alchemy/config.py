@@ -6,7 +6,7 @@ class Config:
     WEATHER_API_URL = os.environ.get("WEATHER_API_URL")
     WEATHER_API_HOST = os.environ.get("WEATHER_API_HOST")
     SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
-    UPLOAD_PATH = 'static/uploads'
+    UPLOAD_PATH = 'static/uploads/'
     BLOG_TITLE = {
         "name": "Blog Cursor",
         "description": "Школа програмування. Ефективна та неформальна IT освiта"

@@ -21,6 +21,7 @@ class Articles(Resource):
             slug=data.get('slug'),
             description=data.get('description'),
             short_description=data.get('short_description'),
+            location=data.get('location'),
             img=data.get('img')
         )
         db.session.add(article)
@@ -99,7 +100,8 @@ class UsersUpdate(Resource):
         user.email = data.get('email'),
         user.created = data.get('created'),
         user.bio = data.get('bio'),
-        user.admin = data.get('admin')
+        user.admin = data.get('admin'),
+        user.location = data.get('location')
 
 
         db.session.add(user)
@@ -117,7 +119,8 @@ class UsersCreate(Resource):
             email=data.get('email'),
             created=data.get('created'),
             bio=data.get('bio'),
-            admin=data.get('admin')
+            admin=data.get('admin'),
+            location=data.get('location')
         )
         db.session.add(user)
         db.session.commit()
