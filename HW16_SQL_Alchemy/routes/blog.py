@@ -79,12 +79,18 @@ def login():
         if check_password(user.password, request.form.get('password')):
             session['user'] = user.serialize
             session['location'] = user.serialize
+        else:
+            return render_template('blog/shared/signin.html', error=True, username=request.form.get('username'))
     else:
         user = User.query.filter_by(username=request.form.get('username')).first()
         if user:
             if check_password(user.password, request.form.get('password')):
                 session['user'] = user.serialize
                 session['location'] = user.serialize
+            else:
+                return render_template('blog/shared/signin.html', error=True, username=request.form.get('username'))
+        else:
+            return render_template('blog/shared/signin.html', error=True, username=request.form.get('username'))
 
     return redirect('/')
 

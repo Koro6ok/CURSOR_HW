@@ -66,6 +66,20 @@ class ArticlesEntity(Resource):
         return Response (status=204)
 
 
+class ArticleCategories(Resource):
+    def get(self):
+        articles = Article.query.all()
+        if articles == None:
+            return Response(status=404)
+        serialized_article = []
+        for article in articles:
+            serialized_category = []
+            for category in article.categories:
+                serialized_category.append(category.title)
+            serialized_article.append({article.title: serialized_category})
+        return serialized_article
+
+
 
 
 class Users(Resource):
@@ -153,6 +167,7 @@ class FooterItem(Resource):
 api.add_resource(MenuItem, '/api/menu-items')
 api.add_resource(Articles, '/api/articles')
 api.add_resource(ArticlesEntity, '/api/articles/<int:id>')
+api.add_resource(ArticleCategories, '/api/article-categories')
 api.add_resource(Users, '/api/users')
 api.add_resource(UsersRead, '/api/users/read/<int:id>')
 api.add_resource(UsersUpdate, '/api/users/update/<int:id>')
